@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../pages/LoginPage');
 
-test.only('Invalid Login Validation', async ({ page }) => {
+test('Invalid Login Validation', async ({ page }) => {
 
   const loginPage = new LoginPage(page);
 

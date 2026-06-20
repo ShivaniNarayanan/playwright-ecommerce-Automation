@@ -1,29 +1,49 @@
-const productsToAdd = [
-  "iphone 13 pro",
-  "zara coat 3"
-];
+const { test, expect } = require('@playwright/test');
 
-for (const product of productsToAdd) {
+test('Add Multiple Products To Cart', async ({ page }) => {
 
-  const count =
-    await page.locator(".card-body").count();
+  const productsToAdd = [
+    "iphone 13 pro",
+    "zara coat 3"
+  ];
 
-  for (let i = 0; i < count; i++) {
+  await page.goto(
+    "https://rahulshettyacademy.com/client/#/auth/login"
+  );
 
-    const text =
-      await page.locator(".card-body")
-        .nth(i)
-        .locator("b")
-        .textContent();
+  await page.locator("[placeholder='email@example.com']")
+    .fill("shivanimoorthy5@gmail.com");
 
-    if (text === product) {
+  await page.locator("[placeholder='enter your passsword']")
+    .fill("Learning55$");
 
-      await page.locator(".card-body")
-        .nth(i)
-        .locator("text=Add To Cart")
-        .click();
+  await page.locator("[type='submit']").click();
 
-      break;
+  await page.locator(".card-body b").first().waitFor();
+
+  for (const product of productsToAdd) {
+
+    const count =
+      await page.locator(".card-body").count();
+
+    for (let i = 0; i < count; i++) {
+
+      const text =
+        await page.locator(".card-body")
+          .nth(i)
+          .locator("b")
+          .textContent();
+
+      if (text === product) {
+
+        await page.locator(".card-body")
+          .nth(i)
+          .locator("text=Add To Cart")
+          .click();
+
+        break;
+      }
     }
   }
-}
+
+});
