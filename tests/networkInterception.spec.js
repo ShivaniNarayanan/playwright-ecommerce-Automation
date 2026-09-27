@@ -23,11 +23,9 @@ test('Validate Login API Response', async ({ page }) => {
   expect(response.status()).toBe(200);
 });
 
-// tests/networkInterception.spec.js
-const { test, expect } = require('@playwright/test');
 
 /**
- * SCENARIO 2: Mocking an Empty Orders Response
+ * SCENARIO 1: Mocking an Empty Orders Response
  * This test intercepts the real API call and returns a custom fake response (Empty Data).
  */
 test('Mock Empty Orders Screen via Network Interception', async ({ page }) => {
@@ -49,7 +47,7 @@ test('Mock Empty Orders Screen via Network Interception', async ({ page }) => {
 });
 
 /**
- * SCENARIO 3: Simulating a 500 Internal Server Error
+ * SCENARIO 2: Simulating a 500 Internal Server Error
  * This test simulates a backend crash when the user attempts to place an order.
  */
 test('Simulate 500 Server Error on Checkout Page', async ({ page }) => {
@@ -62,13 +60,10 @@ test('Simulate 500 Server Error on Checkout Page', async ({ page }) => {
 
   // Navigate to the cart page to test error handling
   await page.goto('https://rahulshettyacademy.com');
-  
-  // Optional: Trigger checkout action to verify error handling UI components
-  // await page.click('text=Checkout');
 });
 
 /**
- * SCENARIO 4: Aborting Images to Optimize Performance
+ * SCENARIO 3: Aborting Images to Optimize Performance
  * This test blocks all image extensions from loading to drastically reduce test runtime.
  */
 test('Speed up testing by aborting all image requests', async ({ page }) => {
